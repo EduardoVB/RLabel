@@ -126,23 +126,4 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
 Option Explicit
-
-Private Sub UserControl11_Click()
-    Caption = Rnd
-End Sub
-
-Private Sub Command1_Click()
-    Label1.Caption = "22"
-    VLabel1.Caption = "22"
-End Sub
-
-Private Sub Label1_Change()
-Stop
-End Sub
-
-Private Sub VLabel1_Change()
-Stop
-End Sub
-
