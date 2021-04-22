@@ -84,20 +84,11 @@ Private Const GM_ADVANCED = 2
 Private Const GM_COMPATIBLE = 1
 
 'Default Property Values:
-Private Const mdef_BackColor = vbWindowBackground
-Private Const mdef_ForeColor = vbWindowText
 Private Const mdef_Enabled = True
 Private Const mdef_Appearance = 1
 Private Const mdef_BorderStyle = 0
-Private Const mdef_Caption = ""
 Private Const mdef_Alignment = vbLeftJustify
 Private Const mdef_AutoSize = False
-Private Const mdef_FontUnderline = False
-Private Const mdef_FontStrikethru = False
-Private Const mdef_FontSize = 0
-Private Const mdef_FontName = ""
-Private Const mdef_FontItalic = False
-Private Const mdef_FontBold = False
 Private Const mdef_WordWrap = False
 Private Const mdef_Orientation = wlHorizontal ' wlVertical
 
@@ -112,40 +103,27 @@ Private mBorderStyle As Integer
 Private mCaption As String
 Private mAlignment As Integer
 Private mAutoSize As Boolean
-Private mFontUnderline As Boolean
-Private mFontStrikethru As Boolean
-Private mFontSize As Single
-Private mFontName As String
-Private mFontItalic As Boolean
-Private mFontBold As Boolean
 Private mWordWrap As Boolean
 Private mOrientation As wlTextOrientationConstants
 Private mGMPrev As Long
 
 'Event Declarations:
 Public Event Click()
+Attribute Click.VB_UserMemId = -600
 Public Event Change()
 Public Event DblClick()
+Attribute DblClick.VB_UserMemId = -601
 Public Event MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Attribute MouseDown.VB_UserMemId = -605
 Public Event MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Attribute MouseMove.VB_UserMemId = -606
 Public Event MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Attribute MouseUp.VB_UserMemId = -607
 
 
 Private Sub mFont_FontChanged(ByVal PropertyName As String)
-    If PropertyName = "Name" Then
-        mFontName = mFont.Name
-    ElseIf PropertyName = "Size" Then
-        mFontSize = mFont.Size
-    ElseIf PropertyName = "Bold" Then
-        mFontBold = mFont.Bold
-    ElseIf PropertyName = "Italic" Then
-        mFontItalic = mFont.Italic
-    ElseIf PropertyName = "Strikethrough" Then
-        mFontStrikethru = mFont.Strikethrough
-    ElseIf PropertyName = "Underline" Then
-        mFontUnderline = mFont.Underline
-    End If
     PropertyChanged "Font"
+    SetAutoSize
 End Sub
 
 Private Sub Picture1_Click()
@@ -200,21 +178,15 @@ End Sub
 Private Sub UserControl_ReadProperties(PropBag As PropertyBag)
     mGMPrev = SetGraphicsMode(Picture1.hdc, GM_ADVANCED)
     
-    mBackColor = PropBag.ReadProperty("BackColor", mdef_BackColor)
-    mForeColor = PropBag.ReadProperty("ForeColor", mdef_ForeColor)
+    mBackColor = PropBag.ReadProperty("BackColor", Ambient.BackColor)
+    mForeColor = PropBag.ReadProperty("ForeColor", Ambient.ForeColor)
     mEnabled = PropBag.ReadProperty("Enabled", mdef_Enabled)
     Set mFont = PropBag.ReadProperty("Font", Ambient.Font)
     mAppearance = PropBag.ReadProperty("Appearance", mdef_Appearance)
     mBorderStyle = PropBag.ReadProperty("BorderStyle", mdef_BorderStyle)
-    mCaption = PropBag.ReadProperty("Caption", mdef_Caption)
+    mCaption = PropBag.ReadProperty("Caption", Ambient.DisplayName)
     mAlignment = PropBag.ReadProperty("Alignment", mdef_Alignment)
     mAutoSize = PropBag.ReadProperty("AutoSize", mdef_AutoSize)
-    mFontUnderline = PropBag.ReadProperty("FontUnderline", mdef_FontUnderline)
-    mFontStrikethru = PropBag.ReadProperty("FontStrikethru", mdef_FontStrikethru)
-    mFontSize = PropBag.ReadProperty("FontSize", mdef_FontSize)
-    mFontName = PropBag.ReadProperty("FontName", mdef_FontName)
-    mFontItalic = PropBag.ReadProperty("FontItalic", mdef_FontItalic)
-    mFontBold = PropBag.ReadProperty("FontBold", mdef_FontBold)
     mWordWrap = PropBag.ReadProperty("WordWrap", mdef_WordWrap)
     mOrientation = PropBag.ReadProperty("Orientation", mdef_Orientation)
     
@@ -239,9 +211,9 @@ Private Sub UserControl_Resize()
     Label1.Refresh
 End Sub
 
-'MemberInfo=8,0,0,0
 Public Property Get BackColor() As OLE_COLOR
 Attribute BackColor.VB_Description = "Devuelve o establece el color de fondo usado para mostrar texto y gráficos en un objeto."
+Attribute BackColor.VB_UserMemId = -501
     BackColor = mBackColor
 End Property
 
@@ -255,7 +227,6 @@ Public Property Let BackColor(ByVal nBackColor As OLE_COLOR)
 End Property
 
 
-'MemberInfo=8,0,0,0
 Public Property Get ForeColor() As OLE_COLOR
 Attribute ForeColor.VB_Description = "Devuelve o establece el color de primer plano usado para mostrar textos y gráficos en un objeto."
     ForeColor = mForeColor
@@ -271,9 +242,9 @@ Public Property Let ForeColor(ByVal nForeColor As OLE_COLOR)
 End Property
 
 
-'MemberInfo=0,0,0,0
 Public Property Get Enabled() As Boolean
 Attribute Enabled.VB_Description = "Devuelve o establece un valor que determina si un objeto puede responder a eventos generados por el usuario."
+Attribute Enabled.VB_UserMemId = -514
     Enabled = mEnabled
 End Property
 
@@ -288,9 +259,8 @@ Public Property Let Enabled(ByVal nEnabled As Boolean)
 End Property
 
 
-'MemberInfo=6,0,0,0
 Public Property Get Font() As Font
-Attribute Font.VB_Description = "Devuelve un objeto Font."
+Attribute Font.VB_Description = "Returns a Font object."
 Attribute Font.VB_UserMemId = -512
     Set Font = mFont
 End Property
@@ -309,9 +279,9 @@ Public Property Let Font(ByVal nFont As Font)
 End Property
 
 
-'MemberInfo=7,0,0,0
 Public Property Get Appearance() As wlStandardAppearanceConstants
 Attribute Appearance.VB_Description = "Devuelve o establece si los objetos se dibujan en tiempo de ejecución con efectos 3D."
+Attribute Appearance.VB_UserMemId = -520
     Appearance = mAppearance
 End Property
 
@@ -329,9 +299,9 @@ Public Property Let Appearance(ByVal nAppearance As wlStandardAppearanceConstant
 End Property
 
 
-'MemberInfo=7,0,0,0
 Public Property Get BorderStyle() As wlStandardBorderStyleConstants
 Attribute BorderStyle.VB_Description = "Devuelve o establece el estilo del borde de un objeto."
+Attribute BorderStyle.VB_UserMemId = -504
     BorderStyle = mBorderStyle
 End Property
 
@@ -347,16 +317,16 @@ Public Property Let BorderStyle(ByVal nBorderStyle As wlStandardBorderStyleConst
 End Property
 
 
-'MemberInfo=5
 Public Sub Refresh()
 Attribute Refresh.VB_Description = "Obliga a volver a dibujar un objeto."
+Attribute Refresh.VB_UserMemId = -550
      Label1.Refresh
 End Sub
 
 
-'MemberInfo=13,0,0,
 Public Property Get Caption() As String
 Attribute Caption.VB_Description = "Devuelve o establece el texto mostrado en la barra de título de un objeto o bajo el icono de un objeto."
+Attribute Caption.VB_UserMemId = -518
     Caption = mCaption
 End Property
 
@@ -372,7 +342,6 @@ Public Property Let Caption(ByVal nCaption As String)
 End Property
 
 
-'MemberInfo=7,0,0,0
 Public Property Get Alignment() As AlignmentConstants
 Attribute Alignment.VB_Description = "Devuelve o establece la alineación de un control CheckBox u OptionButton, o el texto de un control."
     Alignment = mAlignment
@@ -390,9 +359,9 @@ Public Property Let Alignment(ByVal nAlignment As AlignmentConstants)
 End Property
 
 
-'MemberInfo=0,0,0,0
 Public Property Get AutoSize() As Boolean
 Attribute AutoSize.VB_Description = "Determina si un control cambia de tamaño automáticamente para mostrar todo su contenido."
+Attribute AutoSize.VB_UserMemId = -500
     AutoSize = mAutoSize
 End Property
 
@@ -409,109 +378,101 @@ Public Property Let AutoSize(ByVal nAutoSize As Boolean)
 End Property
 
 
-'MemberInfo=0,0,0,0
 Public Property Get FontUnderline() As Boolean
 Attribute FontUnderline.VB_Description = "Devuelve o establece el estilo subrayado de una fuente."
 Attribute FontUnderline.VB_MemberFlags = "400"
-    FontUnderline = mFontUnderline
+    FontUnderline = mFont.Underline
 End Property
 
 Public Property Let FontUnderline(ByVal nFontUnderline As Boolean)
-    If nFontUnderline <> mFontUnderline Then
-        mFontUnderline = nFontUnderline
+    If nFontUnderline <> mFont.Underline Then
+        mFont.Underline = nFontUnderline
         PropertyChanged "FontUnderline"
-        Label1.FontUnderline = mFontUnderline
+        Label1.FontUnderline = mFont.Underline
         Picture1.Refresh
     End If
 End Property
 
 
-'MemberInfo=0,0,0,0
 Public Property Get FontStrikethru() As Boolean
 Attribute FontStrikethru.VB_Description = "Devuelve o establece el estilo tachado de una fuente."
 Attribute FontStrikethru.VB_MemberFlags = "400"
-    FontStrikethru = mFontStrikethru
+    FontStrikethru = mFont.Strikethrough
 End Property
 
 Public Property Let FontStrikethru(ByVal nFontStrikethru As Boolean)
-    If nFontStrikethru <> mFontStrikethru Then
-        mFontStrikethru = nFontStrikethru
+    If nFontStrikethru <> mFont.Strikethrough Then
+        mFont.Strikethrough = nFontStrikethru
         PropertyChanged "FontStrikethru"
-        Label1.FontStrikethru = mFontStrikethru
+        Label1.FontStrikethru = mFont.Strikethrough
         Picture1.Refresh
     End If
 End Property
 
 
-'MemberInfo=12,0,0,0
 Public Property Get FontSize() As Single
 Attribute FontSize.VB_Description = "Especifica el tamaño (en puntos) de la fuente que aparece en cada fila del nivel especificado."
 Attribute FontSize.VB_MemberFlags = "400"
-    FontSize = mFontSize
+    FontSize = mFont.Size
 End Property
 
 Public Property Let FontSize(ByVal nFontSize As Single)
-    If nFontSize <> mFontSize Then
-        mFontSize = nFontSize
+    If nFontSize <> mFont.Size Then
+        mFont.Size = nFontSize
         PropertyChanged "FontSize"
-        Label1.FontSize = mFontSize
+        Label1.FontSize = mFont.Size
         Picture1.Refresh
     End If
 End Property
 
 
-'MemberInfo=13,0,0,
 Public Property Get FontName() As String
 Attribute FontName.VB_Description = "Especifica el nombre de la fuente que aparece en cada fila del nivel especificado."
 Attribute FontName.VB_MemberFlags = "400"
-    FontName = mFontName
+    FontName = mFont.Name
 End Property
 
 Public Property Let FontName(ByVal nFontName As String)
-    If nFontName <> mFontName Then
-        mFontName = nFontName
+    If nFontName <> mFont.Name Then
+        mFont.Name = nFontName
         PropertyChanged "FontName"
-        Label1.FontName = mFontName
+        Label1.FontName = mFont.Name
         Picture1.Refresh
     End If
 End Property
 
-
-'MemberInfo=0,0,0,0
 Public Property Get FontItalic() As Boolean
 Attribute FontItalic.VB_Description = "Devuelve o establece el estilo cursiva de una fuente."
 Attribute FontItalic.VB_MemberFlags = "400"
-    FontItalic = mFontItalic
+    FontItalic = mFont.Italic
 End Property
 
 Public Property Let FontItalic(ByVal nFontItalic As Boolean)
-    If nFontItalic <> mFontItalic Then
-        mFontItalic = nFontItalic
+    If nFontItalic <> mFont.Italic Then
+        mFont.Italic = nFontItalic
         PropertyChanged "FontItalic"
-        Label1.FontItalic = mFontItalic
+        Label1.FontItalic = mFont.Italic
         Picture1.Refresh
     End If
 End Property
 
 
-'MemberInfo=0,0,0,0
 Public Property Get FontBold() As Boolean
 Attribute FontBold.VB_Description = "Devuelve o establece el estilo negrita de una fuente."
 Attribute FontBold.VB_MemberFlags = "400"
-    FontBold = mFontBold
+    FontBold = mFont.Bold
 End Property
 
 Public Property Let FontBold(ByVal nFontBold As Boolean)
-    If nFontBold <> mFontBold Then
-        mFontBold = nFontBold
+    If nFontBold <> mFont.Bold Then
+        mFont.Bold = nFontBold
         PropertyChanged "FontBold"
-        Label1.FontBold = mFontBold
+        Label1.FontBold = mFont.Bold
         Picture1.Refresh
     End If
 End Property
 
 
-'MemberInfo=0,0,0,0
 Public Property Get WordWrap() As Boolean
 Attribute WordWrap.VB_Description = "Devuelve o establece un valor que determina si un control se expande para ajustarse al texto de su título."
     WordWrap = mWordWrap
@@ -545,8 +506,8 @@ End Property
 Private Sub UserControl_InitProperties()
     mGMPrev = SetGraphicsMode(Picture1.hdc, GM_ADVANCED)
     
-    mBackColor = mdef_BackColor
-    mForeColor = mdef_ForeColor
+    mBackColor = Ambient.BackColor
+    mForeColor = Ambient.ForeColor
     mEnabled = mdef_Enabled
     Set mFont = Ambient.Font
     mAppearance = mdef_Appearance
@@ -554,12 +515,6 @@ Private Sub UserControl_InitProperties()
     mCaption = Ambient.DisplayName
     mAlignment = mdef_Alignment
     mAutoSize = mdef_AutoSize
-    mFontUnderline = mdef_FontUnderline
-    mFontStrikethru = mdef_FontStrikethru
-    mFontSize = mdef_FontSize
-    mFontName = mdef_FontName
-    mFontItalic = mdef_FontItalic
-    mFontBold = mdef_FontBold
     mWordWrap = mdef_WordWrap
     mOrientation = mdef_Orientation
     
@@ -572,21 +527,15 @@ End Sub
 
 Private Sub UserControl_WriteProperties(PropBag As PropertyBag)
 
-    Call PropBag.WriteProperty("BackColor", mBackColor, mdef_BackColor)
-    Call PropBag.WriteProperty("ForeColor", mForeColor, mdef_ForeColor)
+    Call PropBag.WriteProperty("BackColor", mBackColor, Ambient.BackColor)
+    Call PropBag.WriteProperty("ForeColor", mForeColor, Ambient.ForeColor)
     Call PropBag.WriteProperty("Enabled", mEnabled, mdef_Enabled)
     Call PropBag.WriteProperty("Font", mFont, Ambient.Font)
     Call PropBag.WriteProperty("Appearance", mAppearance, mdef_Appearance)
     Call PropBag.WriteProperty("BorderStyle", mBorderStyle, mdef_BorderStyle)
-    Call PropBag.WriteProperty("Caption", mCaption, mdef_Caption)
+    Call PropBag.WriteProperty("Caption", mCaption, Ambient.DisplayName)
     Call PropBag.WriteProperty("Alignment", mAlignment, mdef_Alignment)
     Call PropBag.WriteProperty("AutoSize", mAutoSize, mdef_AutoSize)
-    Call PropBag.WriteProperty("FontUnderline", mFontUnderline, mdef_FontUnderline)
-    Call PropBag.WriteProperty("FontStrikethru", mFontStrikethru, mdef_FontStrikethru)
-    Call PropBag.WriteProperty("FontSize", mFontSize, mdef_FontSize)
-    Call PropBag.WriteProperty("FontName", mFontName, mdef_FontName)
-    Call PropBag.WriteProperty("FontItalic", mFontItalic, mdef_FontItalic)
-    Call PropBag.WriteProperty("FontBold", mFontBold, mdef_FontBold)
     Call PropBag.WriteProperty("WordWrap", mWordWrap, mdef_WordWrap)
     Call PropBag.WriteProperty("Orientation", mOrientation, mdef_Orientation)
 End Sub
@@ -602,12 +551,6 @@ Private Sub SetLabel()
     Label1.Caption = mCaption
     Label1.Alignment = mAlignment
     Label1.AutoSize = mAutoSize
-    Label1.FontUnderline = mFontUnderline
-    Label1.FontStrikethru = mFontStrikethru
-    If mFontSize > 0 Then Label1.FontSize = mFontSize
-    If mFontName <> "" Then Label1.FontName = mFontName
-    Label1.FontItalic = mFontItalic
-    Label1.FontBold = mFontBold
     Label1.WordWrap = mWordWrap
     SetAutoSize
     UserControl_Resize
@@ -624,6 +567,7 @@ Private Sub SetAutoSize()
 End Sub
 
 Public Property Get hWnd() As Long
+Attribute hWnd.VB_UserMemId = -515
     hWnd = Picture1.hWnd
 End Property
 

@@ -71,7 +71,6 @@ Begin VB.Form Form1
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Caption         =   "LabelEx7"
       Orientation     =   4
       Angle           =   45
    End
@@ -92,7 +91,6 @@ Begin VB.Form Form1
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Caption         =   "LabelEx6"
       Orientation     =   4
       Angle           =   15
    End
@@ -121,7 +119,6 @@ Begin VB.Form Form1
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Caption         =   "LabelEx4"
       Orientation     =   2
    End
    Begin Project1.RLabel LabelEx3 
@@ -141,7 +138,6 @@ Begin VB.Form Form1
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Caption         =   "LabelEx3"
       Alignment       =   1
       Orientation     =   1
    End
@@ -162,7 +158,6 @@ Begin VB.Form Form1
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Caption         =   "LabelEx2"
    End
    Begin Project1.RLabel LabelEx1 
       Height          =   1140
@@ -183,7 +178,6 @@ Begin VB.Form Form1
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Caption         =   "LabelEx1"
       AutoSize        =   -1  'True
       Orientation     =   1
       BackStyle       =   1
