@@ -39,7 +39,7 @@ Begin VB.Form Form1
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Caption         =   "ﬂﬂpuﬂﬂ"
+      Caption         =   "√ü√üpu√ü√ü"
       AutoSize        =   -1  'True
       Orientation     =   4
       Angle           =   270

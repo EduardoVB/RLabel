@@ -230,7 +230,7 @@ End Sub
 
 'MemberInfo=8,0,0,0
 Public Property Get BackColor() As OLE_COLOR
-Attribute BackColor.VB_Description = "Devuelve o establece el color de fondo usado para mostrar texto y gráficos en un objeto."
+Attribute BackColor.VB_Description = "Devuelve o establece el color de fondo usado para mostrar texto y grÃ¡ficos en un objeto."
     BackColor = mBackColor
 End Property
 
@@ -246,7 +246,7 @@ End Property
 
 'MemberInfo=8,0,0,0
 Public Property Get ForeColor() As OLE_COLOR
-Attribute ForeColor.VB_Description = "Devuelve o establece el color de primer plano usado para mostrar textos y gráficos en un objeto."
+Attribute ForeColor.VB_Description = "Devuelve o establece el color de primer plano usado para mostrar textos y grÃ¡ficos en un objeto."
     ForeColor = mForeColor
 End Property
 
@@ -300,7 +300,7 @@ End Property
 
 'MemberInfo=7,0,0,0
 Public Property Get Appearance() As wlStandardAppearanceConstants
-Attribute Appearance.VB_Description = "Devuelve o establece si los objetos se dibujan en tiempo de ejecución con efectos 3D."
+Attribute Appearance.VB_Description = "Devuelve o establece si los objetos se dibujan en tiempo de ejecuciÃ³n con efectos 3D."
     Appearance = mAppearance
 End Property
 
@@ -345,7 +345,7 @@ End Sub
 
 'MemberInfo=13,0,0,
 Public Property Get Caption() As String
-Attribute Caption.VB_Description = "Devuelve o establece el texto mostrado en la barra de título de un objeto o bajo el icono de un objeto."
+Attribute Caption.VB_Description = "Devuelve o establece el texto mostrado en la barra de tÃ­tulo de un objeto o bajo el icono de un objeto."
     Caption = mCaption
 End Property
 
@@ -363,7 +363,7 @@ End Property
 
 'MemberInfo=7,0,0,0
 Public Property Get Alignment() As AlignmentConstants
-Attribute Alignment.VB_Description = "Devuelve o establece la alineación de un control CheckBox u OptionButton, o el texto de un control."
+Attribute Alignment.VB_Description = "Devuelve o establece la alineaciÃ³n de un control CheckBox u OptionButton, o el texto de un control."
     Alignment = mAlignment
 End Property
 
@@ -381,7 +381,7 @@ End Property
 
 'MemberInfo=0,0,0,0
 Public Property Get AutoSize() As Boolean
-Attribute AutoSize.VB_Description = "Determina si un control cambia de tamaño automáticamente para mostrar todo su contenido."
+Attribute AutoSize.VB_Description = "Determina si un control cambia de tamaÃ±o automÃ¡ticamente para mostrar todo su contenido."
     AutoSize = mAutoSize
 End Property
 
@@ -436,7 +436,7 @@ End Property
 
 'MemberInfo=12,0,0,0
 Public Property Get FontSize() As Single
-Attribute FontSize.VB_Description = "Especifica el tamaño (en puntos) de la fuente que aparece en cada fila del nivel especificado."
+Attribute FontSize.VB_Description = "Especifica el tamaÃ±o (en puntos) de la fuente que aparece en cada fila del nivel especificado."
 Attribute FontSize.VB_MemberFlags = "400"
     FontSize = mFont.Size
 End Property
@@ -504,7 +504,7 @@ End Property
 
 'MemberInfo=0,0,0,0
 Public Property Get WordWrap() As Boolean
-Attribute WordWrap.VB_Description = "Devuelve o establece un valor que determina si un control se expande para ajustarse al texto de su título."
+Attribute WordWrap.VB_Description = "Devuelve o establece un valor que determina si un control se expande para ajustarse al texto de su tÃ­tulo."
     WordWrap = mWordWrap
 End Property
 
